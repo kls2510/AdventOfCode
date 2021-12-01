@@ -1,0 +1,8 @@
+.metals/
+.vscode/
+.bloop/
+project/
+target/
+*.png
+*.jpg
+.jvmopts
