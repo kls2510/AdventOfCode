@@ -24,7 +24,7 @@ object Day3 extends WithLogger with Exercise[List[Short]] {
   def findMostCommonBits(input: List[Short]): Short = {
     List.range(0: Short, bitLen).foldLeft(0: Short){
         (acc, index) => {
-            val selector = (Integer.parseInt("1", 2) << index).toShort
+            val selector = (1 << index).toShort
             val allBits = input.map(e => ((e & selector) >> index).toShort)
             val mostCommonBit = findMostCommonBit(allBits)
             (acc | (mostCommonBit << index)).toShort
@@ -48,11 +48,11 @@ object Day3 extends WithLogger with Exercise[List[Short]] {
     val (l1, l2) = List.range(1: Short, bitLen + 1).foldLeft((List(): List[Short], List(): List[Short])){
         (acc, index) => {
             val shift = bitLen - index
-            val selector = (Integer.parseInt("1", 2) << shift).toShort
+            val selector = (1 << shift).toShort
             val maskAndShift = (x: Short) => ((x & selector) >> shift).toShort
 
             val targetMax = findMostCommonBit(acc._1.map(maskAndShift(_)))
-            val targetMin = (findMostCommonBit(acc._2.map(maskAndShift(_))) ^ Integer.parseInt("1", 2)).toShort
+            val targetMin = (findMostCommonBit(acc._2.map(maskAndShift(_))) ^ 1).toShort
             val partitionFun = (x: Short, target: Short) => maskAndShift(x) == target
 
             acc match {
