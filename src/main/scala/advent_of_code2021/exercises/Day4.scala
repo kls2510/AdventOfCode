@@ -7,8 +7,7 @@ import util._
 
 case class BingoBoard(board: Map[Int, (Int, Int)], boardSize: Int = 5) extends WithLogger {
     val coordToNumber = board.map(_.swap)
-
-    def drawGrid(): List[List[Int]] = List.range(0, boardSize).map(
+    val drawGrid: List[List[Int]] = List.range(0, boardSize).map(
         rowNo => {
             List.range(0, boardSize).map(
                 colNo => coordToNumber((rowNo, colNo))
