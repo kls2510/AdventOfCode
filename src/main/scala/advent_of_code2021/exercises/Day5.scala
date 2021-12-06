@@ -1,7 +1,5 @@
 package advent_of_code2021.exercises
 
-import scala.io.Source
-
 import util._
 
 

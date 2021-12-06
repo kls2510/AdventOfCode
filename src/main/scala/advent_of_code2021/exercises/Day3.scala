@@ -1,7 +1,5 @@
 package advent_of_code2021.exercises
 
-import scala.io.Source
-
 import util._
 
 
@@ -9,8 +7,7 @@ object Day3 extends WithLogger with Exercise[List[Short]] {
 
   override val dayNumber: Int = 3
   val bitLen: Short = 12
-  val shortLen: Short = 16
-  val base = Integer.parseInt(List.range(0: Short, 16).map(i => if (i < shortLen - bitLen) "0" else "1").mkString(""), 2).toShort
+  val base = (math.pow(2, bitLen) - 1).toShort
 
   override def processRawLines(input: List[String]): List[Short] = {
     input.map(line => Integer.parseInt(line, 2).toShort)
