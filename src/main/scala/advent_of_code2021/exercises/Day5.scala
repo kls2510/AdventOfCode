@@ -62,25 +62,24 @@ case class Line(start: Point, end: Point) extends WithLogger{
     }
 }
 
-object Day5 extends WithLogger with Exercise[(List[Line], Int, Int)] {
+object Day5 extends WithLogger with Exercise[List[Line]] {
 
     val dayNumber: Int = 5
 
-    override def processRawLines(input: List[String]): (List[Line], Int, Int) = {
-        val lines = input.map(line => {
+    override def processRawLines(input: List[String]): List[Line] = {
+        input.map(line => {
             val points = line.split("->").map(Point.fromString(_)).toList
             points match {
                 case p1 :: p2 :: _ => Line(p1, p2)
             }
         })
-        (lines, lines.map(_.maxX).max, lines.map(_.maxY).max)
     }
 
-    override def part1(input: (List[Line], Int, Int)): Unit = {
+    override def part1(input: List[Line]): Unit = {
         logInfo("Starting part 1")
         
         val grid: Map[(Int, Int), Int] = Map()
-        val finalGrid = input._1.foldLeft(grid)(
+        val finalGrid = input.foldLeft(grid)(
             (grid, line) => {
                 line.markNonDiagonalsOnGrid(grid)
             }
@@ -88,11 +87,11 @@ object Day5 extends WithLogger with Exercise[(List[Line], Int, Int)] {
         logInfo("Score = " + finalGrid.values.filter(_ > 1).map(_ => 1).reduce(_ + _).toString)
     }
 
-    override def part2(input: (List[Line], Int, Int)): Unit = {
+    override def part2(input: List[Line]): Unit = {
         logInfo("Starting part 2")
 
         val grid: Map[(Int, Int), Int] = Map()
-        val finalGrid = input._1.foldLeft(grid)(
+        val finalGrid = input.foldLeft(grid)(
             (grid, line) => {
                 line.markAllOnGrid(grid)
             }
