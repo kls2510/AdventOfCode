@@ -1,7 +1,5 @@
 package advent_of_code2021.exercises
 
-import collection.mutable.PriorityQueue
-
 import util._
 import java.math.BigInteger
 
@@ -63,7 +61,6 @@ object Day16 extends WithLogger with Exercise[List[Char]] {
         }
     }
 
-    // version, packet type, rest
     def popHeader(input: String): (Int, Int, String) = {
         val version = Integer.parseInt(input.take(3), 2)
         val rem1 = input.drop(3)
