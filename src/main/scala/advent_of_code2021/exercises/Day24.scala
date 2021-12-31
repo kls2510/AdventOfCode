@@ -107,11 +107,8 @@ object Day24 extends WithLogger with Exercise[List[Instruction]] {
         logInfo("Starting part 1")
         val alu = ALU()
         val numbersToCheck = genCandidates()
-        val highestNumber = numbersToCheck.zipWithIndex.find{case (num, i) => {
-            val output = alu.runProgram(input, num)
-            output.variables("z") == 0
-        }}
-        logInfo(highestNumber.get._1.mkString)
+        val highestNumber = numbersToCheck.find(num => alu.runProgram(input, num).variables("z") == 0)
+        logInfo(highestNumber.get.mkString)
     }
 
     def genCandidates2(): Iterator[List[Long]] = {
@@ -132,10 +129,7 @@ object Day24 extends WithLogger with Exercise[List[Instruction]] {
         logInfo("Starting part 2")
         val alu = ALU()
         val numbersToCheck = genCandidates2()
-        val lowestNumber = numbersToCheck.zipWithIndex.find{case (num, i) => {
-            val output = alu.runProgram(input, num)
-            output.variables("z") == 0
-        }}
-        logInfo(lowestNumber.get._1.mkString)
+        val highestNumber = numbersToCheck.find(num => alu.runProgram(input, num).variables("z") == 0)
+        logInfo(highestNumber.get.mkString)
     }
 }
